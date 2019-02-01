@@ -20,12 +20,12 @@ public class Help implements Method {
     public String help() {
         return
             "httpc is a curl-like application but supports HTTP protocol only.\n\n" +
-            "Usage: httpc request.command [arguments]\n\n" +
+                    "Usage: httpc request command [arguments]\n\n" +
             "The commands are:\n" +
             "\tget\tExecutes a HTTP GET request and prints the response.\n" +
             "\tpost\tExecutes a HTTP POST request and prints the response.\n" +
             "\thelp\tPrints this screen.\n\n" +
-            "Use \"httpc help [request.command]\" for more information about a request command.";
+                    "Use \"httpc help [request command]\" for more information about a request command.";
     }
 
     @Deprecated

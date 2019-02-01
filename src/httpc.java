@@ -9,13 +9,6 @@ import runnable.Request;
 import java.io.IOException;
 import java.net.Socket;
 
-/**
- * Httpc is a java curl-like application but supports HTTP protocol only.
- * <p>
- * The Uml Diagram for this application is found in the project directory as "UMLDiagram.png".
- *
- * @author Rani Rafid
- */
 public class httpc {
     private Request request;
     private Reply reply;
@@ -50,13 +43,9 @@ public class httpc {
         }
     }
 
-    /**
-     * This is the main method which starts the http client
-     *
-     * @param args arguments to read from
-     */
     public static void main(String[] args) {
         httpc httpc;
+        boolean consumer = false;
 
         try {
 
@@ -83,13 +72,21 @@ public class httpc {
                     httpc.reply.setOutput(args[++i]);
                 } else if (args[i].startsWith("http://")) {
                     httpc.request.setUrl(args[i]);
+                    consumer = true;
+                } else {
+                    throw new MethodException(args[0]);
                 }
             }
 
+            if (!consumer) {
+                throw new MethodException(args[0]);
+            }
             httpc.exec();
 
-        } catch(Exception e) {
+        } catch (MethodException e) {
             System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(new MethodException().getMessage());
         } finally {
             System.exit(0);
         }

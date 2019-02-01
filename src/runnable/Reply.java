@@ -5,14 +5,13 @@ import exception.RedirectionException;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Reply implements Runnable {
     private boolean verbose;
     private String output;
-    private InputStream in;
+    private Scanner in;
 
 
     public void verboseOn() {
@@ -24,12 +23,11 @@ public class Reply implements Runnable {
     }
 
     public void open(InputStream in) {
-        this.in = in;
+        this.in = new Scanner(in);
     }
 
     @Override
     public void run() {
-        Scanner scan = new Scanner(new InputStreamReader(in));
         PrintWriter out;
 
         try {
@@ -38,23 +36,21 @@ public class Reply implements Runnable {
             throw new MethodException();
         }
 
-        if (scan.findInLine(".*(3\\d\\d).*") != null) {
-            scan.useDelimiter("(Location: )");
-            scan.next();
-            scan.useDelimiter("\\p{javaWhitespace}+");
-            scan.next();
-            throw new RedirectionException(scan.next());
-        } else if(scan.findInLine(".*(4\\d\\d).*") != null) {
-            throw new MethodException();
+        if (in.findInLine(".*(3\\d\\d).*") != null) {
+            in.useDelimiter("(Location: )");
+            in.next();
+            in.useDelimiter("\\p{javaWhitespace}+");
+            in.next();
+            throw new RedirectionException(in.next());
         }
 
         if(!verbose) {
-            scan.useDelimiter(".*(\\{\\n).*");
-            scan.next();
+            while (!in.nextLine().isEmpty()) ;
         }
 
-        scan.useDelimiter("\\A");
-        out.print(scan.next());
+        in.useDelimiter("\\A");
+        out.print(in.next());
+
         out.flush();
         out.close();
     }

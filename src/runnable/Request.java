@@ -4,14 +4,13 @@ import exception.MethodException;
 import method.Method;
 
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public class Request implements Method,Runnable {
     private StringBuilder head;
     private String path, host;
     private Method method;
-    private OutputStream out;
+    private PrintWriter out;
 
     public Request(Method method) {
         this.method = method;
@@ -20,6 +19,9 @@ public class Request implements Method,Runnable {
     }
 
     public void addHeader(String arg) {
+        if (!arg.contains(":")) {
+            throw new MethodException(method);
+        }
         head.append(arg).append("\r\n");
     }
 
@@ -41,6 +43,7 @@ public class Request implements Method,Runnable {
         }
 
         arg = arg.replace("http://","");
+
         int var = arg.indexOf("/");
 
 
@@ -61,13 +64,13 @@ public class Request implements Method,Runnable {
     }
 
     public void open(OutputStream out) {
-        this.out = out;
+        this.out = new PrintWriter(out);
     }
 
     @Override
     public void run() {
-        PrintWriter o = new PrintWriter(new OutputStreamWriter(out));
-        StringBuilder t = new StringBuilder(method.getName()).append(' ').append(path)
+
+        StringBuilder t = new StringBuilder(method.getName()).append(" ").append(path)
                 .append(" HTTP/1.0\r\nHost: ").append(host).append("\r\n").append(head);
 
         String temp = method.toString();
@@ -82,8 +85,8 @@ public class Request implements Method,Runnable {
             t.append(temp);
         }
 
-        o.print(t.toString());
-        o.flush();
+        out.print(t.toString());
+        out.flush();
     }
 
     @Override

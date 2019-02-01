@@ -13,7 +13,7 @@ public class Get implements Method {
         return
             "Usage: httpc get [-v] [-h key:value] URL\n\n" +
             "Get executes a HTTP GET request for a given URL.\n\n" +
-            "\t-v\t\t\t\tPrints the detail of the response such as protocol, status,and headers\n" +
+                    "\t-v\t\tPrints the detail of the response such as protocol, status,and headers\n" +
             "\t-h key:value\tAssociates headers to HTTP Request with the format 'key:value'."
         ;
     }
