@@ -5,6 +5,7 @@ import method.Help;
 import method.Method;
 import method.Post;
 
+
 public class MethodException extends RuntimeException {
     private Method h;
 

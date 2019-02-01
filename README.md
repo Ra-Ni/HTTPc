@@ -1,37 +1,70 @@
-# COMP 445 LAB 1
+# HTTPC
 
-## General
-httpc is a curl-like application but supports HTTP protocol only.
+Httpc is a java curl-like application but supports HTTP protocol only.
 
-## Usage
-httpc request [arguments]
+The Uml Diagram for this application is found in the project directory as "UMLDiagram.png".
 
-	- get: executes a HTTP GET request and prints the response.
- 	- post: executes a HTTP POST request and prints the response.
-	- help: prints this screen.
+### Getting Started
 
-**Use "httpc help [request]" for more information about a request.**
+##### Requirements
+- Java JRE 8/1.8+ : Mandatory
+- Java JDK 8/1.8+ : Optional
 
-### GET Usage
-httpc get [-v] [-h key:value] URL
+##### Usage
+- General Usage
+    ```
+    httpc (get|post|help) [arguments]
 
-- -v: prints detail of response (protocol,status, and headers)
-- -h key:value: Associates headers to HTTP request with the format  'key:value'
+    - get: executes a HTTP GET request and prints the response.
+    - post: executes a HTTP POST request and prints the response.
+    - help: prints this screen.
+    ```
+    - Use *httpc help [request]* for more information about a request.
 
-### POST Usage
-httpc post [-v] [-h key:value] [-d inline-data] [-f file] URL
+- GET Usage
+    ```
+    httpc get [-v] (-h key:value)* URL
+    
+    - -v: prints detail of response (protocol,status, and headers)
+    - -h key:value: Associates headers to HTTP request with the format  'key:value'
+    ```
 
-- -v : prints detail of response (protocol,status, and headers)
-- -h key:value : Associates headers to HTTP request with the format  'key:value'
-- -d string : Associates inline data to the body HTTP POST request
-- -f file : Associates the content of a file to the body HTTP POST request
+- POST Usage
+    ```
+    httpc post [-v] (-h key:value)* [-d inline-data] [-f file] URL
+    
+    - -v : prints detail of response (protocol,status, and headers)
+    - -h key:value : Associates headers to HTTP request with the format  'key:value'
+    - -d string : Associates inline data to the body HTTP POST request
+    - -f file : Associates the content of a file to the body HTTP POST request
+    ```
+    - Either [-d] or [-f] can be used, but not both.
 
-**Either [-d] or [-f] can be used, but not both.**
+### Progress
+- [x] (GET|POST|HELP) and URL fields are mandatory
+- [x] Arguments [-v],[-h],and [-o] are available
+- [x] Additional arguments [-d] and [-f] are only available in POST
+- [x] Arguments [-v],[-h],[-d],[-f],[-o] are optional
+- [x] Either argument [-d] or [-f] is consumable
+- [x] If either [-d] or [-f] is called, header appends *Content-Length* param
+- [x] Allow multiple [-h] arguments
+- [x] Print results to console, unless [-o] is called and is valid
+- [x] If sending HELP query, allow options [get|post]
+- [x] If any Exception, print HELP to console
+- [x] HTTP reply code 4xx throws MethodException
+- [x] HTTP reply code 3xx throws RedirectException
+- [x] Catch RedirectException and implicitly perform redirects
+- [x] Allow at most 5 redirects (preventative for infinite loops)
+- [x] If more than 5 redirects performed, throw MethodException
+- [x] Options [-o] and [-f] throws MethodException only if IOException detected
+- [x] Throw MethodException only if any argument is not available
 
-## Demo
-### GET
-**httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'**
+
+### Examples
+##### GET with verbose
+
 ```
+httpc get -v 'http://httpbin.org/get?course=networking&assignment=1'
 HTTP/1.1 200 OK
 Server: nginx
 Date: Fri, 1 Sep 2017 14:52:12 GMT
@@ -54,8 +87,10 @@ Access-Control-Allow-Credentials: true
 }
 ```
 
-**httpc get 'http://httpbin.org/get?course=networking&assignment=1'**
+##### Get with query
+
 ```
+httpc get 'http://httpbin.org/get?course=networking&assignment=1'
 {
 "args": {
 "assignment": "1",
@@ -69,9 +104,9 @@ Access-Control-Allow-Credentials: true
 }
 ```
 
-### POST
-**httpc post -h Content-Type:application/json -d '{"Assignment": 1}' http://httpbin.org/post**
+##### POST with inline
 ```
+httpc post -h Content-Type:application/json -d '{"Assignment": 1}' http://httpbin.org/post
 {
 "args": {},
 "data": "{\"Assignment\": 1}",

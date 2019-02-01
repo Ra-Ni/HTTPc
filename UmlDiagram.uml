@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>exception.MethodException</OriginalElement>
+  <nodes>
+    <node x="1051.9999999999998" y="518.0">method.Post</node>
+    <node x="2104.0" y="518.0">runnable.Reply</node>
+    <node x="1577.9999999999998" y="350.0">runnable.Request</node>
+    <node x="525.9999999999998" y="566.0">method.Help</node>
+    <node x="396.0" y="1286.0">exception.RedirectionException</node>
+    <node x="0.0" y="1286.0">exception.MethodException</node>
+    <node x="187.5" y="1128.0">java.lang.RuntimeException</node>
+    <node x="817.0" y="1128.0">httpc</node>
+    <node x="788.9999999999998" y="0.0">method.Method</node>
+    <node x="2025.5357142857142" y="96.0">java.lang.Runnable</node>
+    <node x="0.0" y="566.5">method.Get</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="method.Post" target="method.Method">
+      <point x="0.0" y="-198.5" />
+      <point x="1304.9999999999998" y="330.0" />
+      <point x="1105.2499999999998" y="330.0" />
+      <point x="63.25" y="150.0" />
+    </edge>
+    <edge source="runnable.Request" target="java.lang.Runnable">
+      <point x="126.5" y="-366.5" />
+      <point x="1957.4999999999998" y="330.0" />
+      <point x="2085.285714285714" y="330.0" />
+      <point x="-59.75" y="54.0" />
+    </edge>
+    <edge source="runnable.Reply" target="java.lang.Runnable">
+      <point x="0.0" y="-198.5" />
+      <point x="2314.5" y="330.0" />
+      <point x="2204.785714285714" y="330.0" />
+      <point x="59.75" y="54.0" />
+    </edge>
+    <edge source="exception.MethodException" target="java.lang.RuntimeException">
+      <point x="0.0" y="-78.5" />
+      <point x="188.0" y="1261.0" />
+      <point x="286.75" y="1261.0" />
+      <point x="-99.25" y="54.0" />
+    </edge>
+    <edge source="runnable.Request" target="method.Method">
+      <point x="-126.5" y="-366.5" />
+      <point x="1704.4999999999998" y="320.0" />
+      <point x="1231.7499999999998" y="320.0" />
+      <point x="189.75" y="150.0" />
+    </edge>
+    <edge source="method.Help" target="method.Method">
+      <point x="0.0" y="-150.5" />
+      <point x="778.9999999999998" y="330.0" />
+      <point x="978.7499999999998" y="330.0" />
+      <point x="-63.25" y="150.0" />
+    </edge>
+    <edge source="exception.RedirectionException" target="java.lang.RuntimeException">
+      <point x="0.0" y="-78.5" />
+      <point x="584.0" y="1261.0" />
+      <point x="485.25" y="1261.0" />
+      <point x="99.25" y="54.0" />
+    </edge>
+    <edge source="method.Get" target="method.Method">
+      <point x="0.0" y="-150.0" />
+      <point x="253.0" y="320.0" />
+      <point x="852.2499999999998" y="320.0" />
+      <point x="-189.75" y="150.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="1134.0" y="903.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
