@@ -51,7 +51,6 @@ The Uml Diagram for this application is found in the project directory as "UMLDi
 - [x] Print results to console, unless [-o] is called and is valid
 - [x] If sending HELP query, allow options [get|post]
 - [x] If any Exception, print HELP to console
-- [x] HTTP reply code 4xx throws MethodException
 - [x] HTTP reply code 3xx throws RedirectException
 - [x] Catch RedirectException and implicitly perform redirects
 - [x] Allow at most 5 redirects (preventative for infinite loops)
